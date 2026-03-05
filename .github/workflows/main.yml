@@ -1,0 +1,17 @@
+name: Docker CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Build the Docker Image
+    # This replaces you manually typing 'docker build'
+      run: docker build -t pass-gen-tool .

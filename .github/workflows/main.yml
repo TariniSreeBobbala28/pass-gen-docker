@@ -1,32 +1,17 @@
 name: Docker CI
-
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
-
+    - uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.9'
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        # Add any dependencies if you have a requirements.txt, 
-        # otherwise this just ensures pip is ready.
-
-    - name: Run Python Tests
+    - name: Run logic tests
       run: python test_logic.py
-
-    - name: Build the Docker Image
+    - name: Build Docker Image
       run: docker build -t pass-gen-tool .
